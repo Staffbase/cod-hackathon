@@ -76,6 +76,7 @@
 		E7A989E127C78E9900CEA5B8 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		E7A989E327C78F3100CEA5B8 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		E7A989E527C790C700CEA5B8 /* ImageAsync.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageAsync.swift; sourceTree = "<group>"; };
+		E7A989E727C7BDBA00CEA5B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +127,7 @@
 		E7A9898527C77D4C00CEA5B8 /* RichPush */ = {
 			isa = PBXGroup;
 			children = (
+				E7A989E727C7BDBA00CEA5B8 /* Info.plist */,
 				E7A989E027C78BDD00CEA5B8 /* api */,
 				E7A9898A27C77D4E00CEA5B8 /* Assets.xcassets */,
 				E7A9898827C77D4C00CEA5B8 /* ContentView.swift */,
@@ -517,6 +519,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"RichPush/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = RichPush/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -545,6 +548,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"RichPush/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = RichPush/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

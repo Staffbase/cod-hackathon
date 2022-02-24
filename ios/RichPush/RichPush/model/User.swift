@@ -9,5 +9,5 @@ import Foundation
 
 struct User: Codable {
     let id: String
-    var profile: Profil
+    var profile: Profile
 }

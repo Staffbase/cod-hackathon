@@ -9,7 +9,7 @@ import Foundation
 
 struct Comment: Codable {
     let id: String
-    let profile: Profil
+    let profile: Profile
     let message: String
     let sent: String
 }

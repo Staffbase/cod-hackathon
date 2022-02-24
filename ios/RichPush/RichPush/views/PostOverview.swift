@@ -92,7 +92,7 @@ struct PostOverviewFooter: View {
                         guard let post = post else {
                             return
                         }
-                        self.post.likes = post.likes
+        
 //                        self.isLiked = (self.post.likes?.allObjects as? [Profile])!.contains(user!.has!)
                     }
                 }, label: {
@@ -149,15 +149,14 @@ struct PostOverviewContent: View {
             }
         }
         .onAppear {
-            self.images = post.imagesIds
+            self.images = post.pictures
         }
     }
 }
 
 
-struct PostOverview_Previews: PreviewProvider {
+/*struct PostOverview_Previews: PreviewProvider {
     static var previews: some View {
-        
-        PostOverview(DataMocks.demoPost, user: .constant(DataMocks.user), channel: .constant(DataMocks.channel))
+        PostOverview(Post(), user: .constant(DataMocks.user), channel: .constant(DataMocks.channel))
     }
-}
+}*/

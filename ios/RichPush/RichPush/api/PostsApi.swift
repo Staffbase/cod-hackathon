@@ -55,7 +55,7 @@ class PostsApi {
     }
     
     class func getPosts(channel: Channel,
-                        completion: @escaping (_ error: Error?) -> Void) {
+                        completion: @escaping (_ posts: [Post], _ error: Error?) -> Void) {
         if let backendUrlStr = Bundle.main.object(forInfoDictionaryKey: "BackendApiKey") as? String,
            let url = URL(string: "\(backendUrlStr)/channels/\(channel.id)/posts") {
             var request = URLRequest(url: url)
@@ -66,21 +66,23 @@ class PostsApi {
                 
                 guard let data = data
                 else {
-                    completion(error)
+                    completion([], error)
                     return
                 }
                 
                 do {
                     let postsData = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [[String: Any]] ?? []
-//                    try Post.parsePosts(channel: channel, postsData: postsData)
-                    completion(nil)
+                    
+                    completion(postsData.map {
+                        Post(data: $0)
+                    }, nil)
                 } catch {
-                    completion(error)
+                    completion([], error)
                 }
             }
             dataTask.resume()
         } else {
-            completion(NSError(domain: "Backend URL incorrect", code: -1, userInfo: nil))
+            completion([], NSError(domain: "Backend URL incorrect", code: -1, userInfo: nil))
         }
     }
 }

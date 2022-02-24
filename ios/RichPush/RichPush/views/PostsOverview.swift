@@ -8,7 +8,7 @@ struct PostsOverview: View {
     
     @Binding var user: User
     
-    var posts: [Post]
+    @State var posts: [Post]
     
     var body: some View {
         NavigationView {
@@ -40,16 +40,14 @@ struct PostsOverview: View {
         }
     }
     
-    private func updateChannels() {
-
-    }
-    
     private func updatePosts() {
-        PostsApi.getPosts(channel: channel!) { error in
+        PostsApi.getPosts(channel: channel!) { postsList, error in
             if let error = error {
                 print(error.localizedDescription)
                 return
             }
+            
+            posts = postsList
         }
     }
 }
