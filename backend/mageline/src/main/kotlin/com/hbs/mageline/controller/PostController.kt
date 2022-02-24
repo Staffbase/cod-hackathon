@@ -3,6 +3,7 @@ package com.hbs.mageline.controller
 import com.hbs.mageline.database.entity.*
 import com.hbs.mageline.database.repository.*
 import com.hbs.mageline.database.repository.ImageRepository
+import com.hbs.mageline.util.ChannelResponse
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -43,12 +44,12 @@ class PostController {
 
     @get:GetMapping
     @get:ResponseBody
-    val allChannels: MutableIterable<Channel>
-        get() = channelRepository.findAll()
+    val allChannelsResponse: List<ChannelResponse>
+        get() = channelRepository.findAll().map { ChannelResponse(channel = it) }
 
     @PostMapping(path = ["/new"])
     @ResponseBody
-    fun createChannel(@RequestBody body: NewChannelBody): ResponseEntity<Channel> {
+    fun createChannel(@RequestBody body: NewChannelBody): ResponseEntity<ChannelResponse> {
         val channel = Channel()
         channel.description = body.description
         channel.title = body.title
@@ -56,12 +57,13 @@ class PostController {
 
         channelRepository.save(channel)
 
-        return ResponseEntity.ok(channel)
+        return ResponseEntity.ok(ChannelResponse(channel = channel))
     }
 
     @GetMapping(path = ["/{channelId}/posts"])
     @ResponseBody
     fun allPosts(@PathVariable channelId: String): ResponseEntity<MutableIterable<Post>> {
+        var allChannels: MutableIterable<Channel> = channelRepository.findAll()
         val channel = allChannels.find { channel ->
             if (channel.id == channelId) {
                 return@find true
@@ -76,6 +78,7 @@ class PostController {
     @PostMapping(path = ["/{channelId}/posts/new"]) // Map ONLY POST Requests
     @ResponseBody
     fun createPost(@PathVariable channelId: String, @RequestBody body: NewPostBody): ResponseEntity<Post> {
+        var allChannels: MutableIterable<Channel> = channelRepository.findAll()
         val channel = allChannels.find { channel ->
             if (channel.id == channelId) {
                 return@find true
@@ -123,6 +126,7 @@ class PostController {
     @PostMapping(path = ["/{channelId}/posts/{postId}/edit"]) // Map ONLY POST Requests
     @ResponseBody
     fun editPost(@PathVariable channelId: String, @PathVariable postId: String, @RequestBody body: NewPostBody): ResponseEntity<Post> {
+        var allChannels: MutableIterable<Channel> = channelRepository.findAll()
         val channel = allChannels.find { channel ->
             if (channel.id == channelId) {
                 return@find true
@@ -174,6 +178,7 @@ class PostController {
     @GetMapping(path = ["/{channelId}/posts/{postId}/comments"])
     @ResponseBody
     fun getComments(@PathVariable channelId: String, @PathVariable postId: String): ResponseEntity<Iterable<Comment>> {
+        var allChannels: MutableIterable<Channel> = channelRepository.findAll()
         val channel = allChannels.find { channel ->
             if (channel.id == channelId) {
                 return@find true
@@ -194,6 +199,7 @@ class PostController {
     @GetMapping(path = ["/{channelId}/posts/{postId}/pictures"])
     @ResponseBody
     fun getPictures(@PathVariable channelId: String, @PathVariable postId: String): ResponseEntity<Iterable<String>> {
+        var allChannels: MutableIterable<Channel> = channelRepository.findAll()
         val channel = allChannels.find { channel ->
             if (channel.id == channelId) {
                 return@find true
@@ -215,6 +221,7 @@ class PostController {
     @PostMapping(path = ["/{channelId}/posts/{postId}/like/{userId}"])
     @ResponseBody
     fun likePost(@PathVariable channelId: String, @PathVariable postId: String, @PathVariable userId: String): ResponseEntity<Post> {
+        var allChannels: MutableIterable<Channel> = channelRepository.findAll()
         val channel = allChannels.find { channel ->
             if (channel.id == channelId) {
                 return@find true
@@ -261,6 +268,7 @@ class PostController {
     @PostMapping(path = ["/{channelId}/posts/{postId}/comments"])
     @ResponseBody
     fun commentPost(@PathVariable channelId: String, @PathVariable postId: String, @RequestBody body: NewPostBody): ResponseEntity<Comment> {
+        var allChannels: MutableIterable<Channel> = channelRepository.findAll()
         val channel = allChannels.find { channel ->
             if (channel.id == channelId) {
                 return@find true
