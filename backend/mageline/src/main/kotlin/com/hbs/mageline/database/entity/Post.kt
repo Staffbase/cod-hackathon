@@ -18,7 +18,7 @@ class Post {
     @OneToOne
     lateinit var profile: Profile
 
-    private var likes: ArrayList<ProfileReturn> = ArrayList()
+    private var likes: ArrayList<Profile> = ArrayList()
 
     @OneToMany
     lateinit var comments: MutableList<Comment>

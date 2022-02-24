@@ -1,6 +1,7 @@
 package com.hbs.mageline.util
 
 import com.hbs.mageline.database.entity.*
+import java.io.Serializable
 import java.time.LocalDateTime
 import javax.persistence.Id
 import javax.persistence.OneToMany
@@ -28,6 +29,7 @@ class PostResponse {
     lateinit var pictures: MutableList<String>
     var shares: Int = 0
     lateinit var lastUpdated: LocalDateTime
+    lateinit var profile: Profile
 
     constructor(post: Post?) {
         post?.let {
@@ -38,6 +40,7 @@ class PostResponse {
             pictures = it.getImagesIds()
             shares = it.shares
             lastUpdated = it.lastUpdated
+            profile = it.profile
         }
     }
 }

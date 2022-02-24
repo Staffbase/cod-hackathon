@@ -5,14 +5,6 @@ import java.io.Serializable
 import javax.persistence.Entity
 import javax.persistence.Id
 
-class ProfileReturn: Serializable {
-    lateinit var id: String
-    lateinit var picture: String
-    lateinit var name: String
-    lateinit var email: String
-    lateinit var phone: String
-}
-
 @Entity
 class Profile {
     @Id
