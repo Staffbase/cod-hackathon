@@ -36,6 +36,7 @@ func handleSend(writer http.ResponseWriter, request *http.Request) {
 	}
 
 	hub := notificationhubs.NewNotificationHub("Endpoint=sb://codhack.servicebus.windows.net/;SharedAccessKeyName=DefaultFullSharedAccessSignature;SharedAccessKey=wqry5NCadjHRfX0Jswh5MOBPmJxQgcTS1jb6tSgnsVU=", "cod-hub-01")
+	//n, _ := notificationhubs.NewNotification(notificationhubs.GcmFormat, payload)
 	n, _ := notificationhubs.NewNotification(notificationhubs.Template, payload)
 
 	// Broadcast push
@@ -45,13 +46,4 @@ func handleSend(writer http.ResponseWriter, request *http.Request) {
 	}
 
 	fmt.Println("Message successfully created:", string(b), t)
-
-	// Tag category push
-	tags := "tag1 || tag2"
-	b, _, err = hub.Send(context.TODO(), n, &tags)
-	if err != nil {
-		panic(err)
-	}
-
-	fmt.Println("Message successfully created:", string(b))
 }
