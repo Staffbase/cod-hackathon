@@ -13,8 +13,6 @@ class Comment {
     @OneToOne
     lateinit var profile: Profile
 
-    @Transient
     lateinit var message: String
-
     lateinit var sent: LocalDateTime
 }

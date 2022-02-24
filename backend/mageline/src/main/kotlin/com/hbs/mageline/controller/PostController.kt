@@ -21,6 +21,11 @@ class NewPostBody {
     lateinit var pictures: MutableList<String>
 }
 
+class NewCommentBody {
+    lateinit var message: String
+    lateinit var userId: String
+}
+
 class NewChannelBody {
     lateinit var title: String
     lateinit var description: String
@@ -219,7 +224,7 @@ class PostController {
 
     @PostMapping(path = ["/{channelId}/posts/{postId}/comments"])
     @ResponseBody
-    fun commentPost(@PathVariable channelId: String, @PathVariable postId: String, @RequestBody body: NewPostBody): ResponseEntity<CommentResponse> {
+    fun commentPost(@PathVariable channelId: String, @PathVariable postId: String, @RequestBody body: NewCommentBody): ResponseEntity<CommentResponse> {
         var allChannels: MutableIterable<Channel> = channelRepository.findAll()
         val channel = allChannels.find { channel ->
             if (channel.id == channelId) {
