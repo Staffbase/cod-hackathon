@@ -55,7 +55,7 @@ struct PostOverviewHeader: View {
                 Text(post.profile.name)
                     .font(.title2)
                     .fontWeight(.semibold)
-                Text(post.lastUpdated?.debugDescription ?? "")
+                Text(post.lastUpdated.formatted(date: .abbreviated, time: .shortened))
                     .font(.footnote)
                     .foregroundColor(Color.gray)
             }
@@ -84,17 +84,6 @@ struct PostOverviewFooter: View {
             
             HStack {
                 Button(action: {
-                    PostsApi.likePost(managedObjectContext,
-                                     channelId: channel?.id ?? "",
-                                     postId: post.id,
-                                     userId: user.id)
-                    { post, error in
-                        guard let post = post else {
-                            return
-                        }
-        
-//                        self.isLiked = (self.post.likes?.allObjects as? [Profile])!.contains(user!.has!)
-                    }
                 }, label: {
                     HStack(spacing: 10) {
                         Image(systemName: isLiked ? "heart.fill" : "heart")
@@ -143,7 +132,7 @@ struct PostOverviewContent: View {
                 .font(.body)
                 .lineLimit(6)
             
-            if images.count > 0 {
+            if post.pictures.count > 0 {
                 ImageGridView($images, isShowingSheet: .constant(false))
                     .frame(minWidth: 0, idealWidth: 100, maxWidth: .infinity, minHeight: 0, idealHeight: 100, maxHeight: 120)
             }

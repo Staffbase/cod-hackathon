@@ -21,7 +21,7 @@ struct Post: Codable {
     var shares: Int
     var userId: String
     var profile: Profile
-    var lastUpdated: String?
+    var lastUpdated: Date
     var pictures: [String]
     var comments: [Comment] = []
     var likes: [Profile] = []
@@ -32,8 +32,12 @@ struct Post: Codable {
         message = data["message"] as? String ?? ""
         shares = data["shares"] as? Int ?? 0
         userId = data["userId"] as? String ?? ""
-        lastUpdated = data["lastUpdated"] as? String ?? nil
+        
         pictures = data["pictures"] as? [String] ?? []
         profile = Profile(data: data["profile"] as? [String: Any] ?? [:])
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS"
+        lastUpdated = dateFormatter.date(from: data["lastUpdated"] as? String ?? "") ?? Date()
     }
 }

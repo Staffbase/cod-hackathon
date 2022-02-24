@@ -59,25 +59,22 @@ struct CreatePostView: View {
     }
     
     private func addPostAction() {
-        /*let user = DataMocks.user
-        let post = Post()
-        post.images.append(contentsOf: images)
-        post.title = title
-        post.message = message
-        post.channel = channel
-        post.owner = user.profile
+        let user = DataMocks.user
+        let post: [String: Any] = [
+            "title": title,
+            "message": message,
+            "userId": user.id,
+            "pictures": images
+        ]
         
-        PostsApi.createPost(post) { id, error in
-            guard let id = id
+        PostsApi.createPost(post) { post, error in
+            guard let _ = post
             else {
                 self.isErrorPost = true
                 return
             }
-            post.id = id
-            channel.posts.append(post)
-            Post.save(viewContext)
             onComplete()
-        }*/
+        }
     }
 }
 

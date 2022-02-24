@@ -4,5 +4,7 @@
 <dict>
 	<key>BackendApiKey</key>
 	<string>http://192.168.100.123:8080</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Image for posts</string>
 </dict>
 </plist>

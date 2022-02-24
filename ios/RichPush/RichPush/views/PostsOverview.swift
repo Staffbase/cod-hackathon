@@ -21,11 +21,16 @@ struct PostsOverview: View {
                 .listRowSeparator(.hidden)
                 .listRowBackground(Color.clear)
                 
-                ForEach(posts, id: \.id) { post in
+                ForEach(posts.sorted(by: { lhs, rhs in
+                    return lhs.lastUpdated.compare(rhs.lastUpdated) == .orderedDescending
+                }), id: \.id) { post in
                     PostOverview(post, user: $user, channel: $channel)
                         .listRowSeparator(.hidden)
                         .listRowBackground(Color.clear)
                 }
+            }
+            .onAppear {
+                updatePosts()
             }
             .refreshable {
                 updatePosts()
@@ -34,6 +39,7 @@ struct PostsOverview: View {
             .sheet(isPresented: $isCreatePostPresented) {
                 CreatePostView(channel: channel!) {
                     self.isCreatePostPresented = false
+                    updatePosts()
                 }
             }
             .navigationTitle(channel!.title)

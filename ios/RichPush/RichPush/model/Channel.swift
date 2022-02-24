@@ -11,4 +11,5 @@ struct Channel {
     var id: String
     var title: String
     var description: String
+    var posts: [Post] = []
 }

@@ -26,7 +26,7 @@ class ImageApi {
     
     class func sendImage(_ image: UIImage, completion: @escaping (_ id: String?, _ error: Error?) -> Void) {
         if let backendUrlStr = Bundle.main.object(forInfoDictionaryKey: "BackendApiKey") as? String,
-           let url = URL(string: "\(backendUrlStr)/images/new") {
+           let url = URL(string: "\(backendUrlStr)/images") {
             let boundary = "\(UUID().uuidString)"
             var request = URLRequest(url: url)
             request.setValue("multipart/form-data; boundary=Boundary-\(boundary)", forHTTPHeaderField: "Content-Type")
@@ -55,8 +55,8 @@ class ImageApi {
                 if let data = data {
                     do {
                         let idData = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
-                        let id = idData as? String
-                        completion(id, nil)
+                        let id = idData as? [String]
+                        completion(id![0], nil)
                     } catch {
                         completion(nil, error)
                     }

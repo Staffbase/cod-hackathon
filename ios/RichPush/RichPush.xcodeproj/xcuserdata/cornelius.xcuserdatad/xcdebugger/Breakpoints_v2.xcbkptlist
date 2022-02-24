@@ -7,32 +7,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "5752CCA3-E7B4-4FC5-8816-EBA93FC07F20"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RichPush/views/PostsOverview.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "45"
-            endingLineNumber = "45"
-            landmarkName = "updatePosts()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "54CD6668-1BDD-426B-B570-BC079788AB9A"
-            shouldBeEnabled = "Yes"
+            uuid = "BC8DAC7A-D11E-48D7-AB9B-C6A9FCF492B4"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RichPush/api/PostsApi.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "75"
-            endingLineNumber = "75"
-            landmarkName = "getPosts(channel:completion:)"
+            startingLineNumber = "26"
+            endingLineNumber = "26"
+            landmarkName = "createPost(_:completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

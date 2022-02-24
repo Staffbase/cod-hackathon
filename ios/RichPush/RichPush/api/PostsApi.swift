@@ -2,22 +2,15 @@ import SwiftUI
 import CoreData
 
 class PostsApi {
-    class func createPost(_ post: NewPost, completion: @escaping (_ postId: String?, _ error: Error?) -> Void) {
+    class func createPost(_ post: [String: Any], completion: @escaping (_ post: Post?, _ error: Error?) -> Void) {
         if let backendUrlStr = Bundle.main.object(forInfoDictionaryKey: "BackendApiKey") as? String,
-           let url = URL(string: "\(backendUrlStr)/channels/\(DataMocks.channel.id)/posts/new") {
+           let url = URL(string: "\(backendUrlStr)/channels/\(DataMocks.channel.id)/posts") {
             var request = URLRequest(url: url)
             request.addValue("application/json", forHTTPHeaderField: "Content-Type")
             request.httpMethod = "POST"
             
-            let body: [String : Any] = [
-                "title" : post.title,
-                "message": post.message,
-                "profileId": post.userId,
-                "pictures": post.pictures
-            ]
-            
             do {
-                request.httpBody = try JSONSerialization.data(withJSONObject: body, options: .sortedKeys)
+                request.httpBody = try JSONSerialization.data(withJSONObject: post, options: .sortedKeys)
             } catch let error {
                 completion(nil, error)
             }
@@ -30,9 +23,8 @@ class PostsApi {
                 }
                 
                 do {
-                    let idData = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
-                    let id = idData as? String
-                    completion(id, nil)
+                    let postData = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any] ?? [:]
+                    completion(Post(data: postData), nil)
                 } catch {
                     completion(nil, error)
                 }
