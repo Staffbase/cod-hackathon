@@ -50,7 +50,7 @@ class ContactsController {
         return Triple(user, profile, null)
     }
 
-    @PostMapping(path = ["/new"])
+    @PostMapping
     @ResponseBody
     fun addContact(@RequestBody body: AddContactBody): ResponseEntity<User> {
         val (user, profile, error) = fetchItems(body)
@@ -69,7 +69,7 @@ class ContactsController {
         return ResponseEntity.ok(user)
     }
 
-    @PostMapping(path = ["/delete"])
+    @DeleteMapping
     @ResponseBody
     fun removeContact(@RequestBody body: AddContactBody): ResponseEntity<User> {
         val (user, profile, error) = fetchItems(body)

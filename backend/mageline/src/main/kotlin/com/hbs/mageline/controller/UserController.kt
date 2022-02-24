@@ -45,7 +45,7 @@ class UserController {
     val allUsers: MutableIterable<User>
         get() = userRepository.findAll()
 
-    @PostMapping(path = ["/new"])
+    @PostMapping
     @ResponseBody
     fun createUser(@RequestBody body: NewUserBody): ResponseEntity<User> {
         val user = allUsers.find { user ->
@@ -77,7 +77,7 @@ class UserController {
         return ResponseEntity.ok(newUser)
     }
 
-    @PostMapping(path = ["/delete"])
+    @DeleteMapping
     @ResponseBody
     fun removeUser(@RequestBody body: LoginBody): ResponseEntity<User> {
         for (user in allUsers) {
@@ -90,7 +90,7 @@ class UserController {
         return ResponseEntity(HttpStatus.FORBIDDEN)
     }
 
-    @PostMapping(path = ["/{id}/edit"])
+    @PutMapping(path = ["/{id}"])
     @ResponseBody
     fun editUser(@PathVariable id: String, @RequestBody body: EditUserBody): ResponseEntity<User> {
         val user = allUsers.find { user ->

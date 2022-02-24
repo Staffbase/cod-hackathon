@@ -27,7 +27,7 @@ internal class ImageController {
     val allPictures: List<String>
         get() = imageRepository.findAll().map { image: Image -> image.id }
 
-    @PostMapping(path = ["/new"], consumes = [MediaType.MULTIPART_FORM_DATA_VALUE])
+    @PostMapping(consumes = [MediaType.MULTIPART_FORM_DATA_VALUE])
     @ResponseBody
     fun uploadImages(@RequestParam("files") multipartImages: List<MultipartFile>): ResponseEntity<MutableIterable<String>> {
         val ids: ArrayList<String> = ArrayList()

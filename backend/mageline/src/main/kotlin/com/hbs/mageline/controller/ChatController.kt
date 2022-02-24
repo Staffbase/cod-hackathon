@@ -72,7 +72,7 @@ class ChatController {
         return participants
     }
 
-    @PostMapping(path = ["/new"])
+    @PostMapping
     @ResponseBody
     fun createChat(@RequestBody body: NewChatBody): NewChatResponse {
         val participants = fetchParticipants(body)
